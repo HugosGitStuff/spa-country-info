@@ -1,7 +1,7 @@
 // allCountriesView.js
 // This view renders all countries in a grid
 
-// Helper to get correct base path for navigation
+// Helper to get correct base path for navigation (github pages support)
 function getBasePath() {
     const base = document.querySelector('base');
     return base ? base.getAttribute('href') : '/';

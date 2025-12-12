@@ -1,5 +1,11 @@
 // this view renders the detailed page for a single country
 
+// Helper to get correct base path for navigation (guthub pages support)
+function getBasePath() {
+    const base = document.querySelector('base');
+    return base ? base.getAttribute('href') : '/';
+}
+
 // render country detail page... single country object from api
 function render(country) {
     const container = document.querySelector('#container');
@@ -45,13 +51,20 @@ function render(country) {
                 </div>
                 
                 <div class="mt-4">
-                    <a href="/" class="btn btn-secondary">← Back to Home</a>
+                    <a id="backButton" class="btn btn-secondary">← Back to Home</a>
                 </div>
             </div>
         </div>
     `;
 
     container.appendChild(detailDiv);
+
+    // Setup back button with correct base path(github pages support)
+    const backButton = document.querySelector('#backButton');
+    backButton.addEventListener('click', () => {
+        const basePath = getBasePath();
+        window.location.href = basePath; // Goes to home
+    });
 
 }
 
