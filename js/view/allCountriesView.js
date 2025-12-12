@@ -1,5 +1,4 @@
-// allCountriesView.js
-// This view renders all countries in a grid
+// this view renders all countries in a grid
 
 // Helper to get correct base path for navigation (github pages support)
 function getBasePath() {
@@ -9,13 +8,13 @@ function getBasePath() {
 
 function render(countries) {
     const container = document.querySelector('#container');
-    container.innerHTML = ''; // Clear previous content
+    container.innerHTML = ''; // clear previous content
     
-    // Create grid container
+    // create grid container
     const grid = document.createElement('div');
     grid.className = 'country-grid';
     
-    // Create a card for each country
+    // create card for each country
     countries.forEach(country => {
         const card = createCountryCard(country);
         grid.appendChild(card);
@@ -24,7 +23,7 @@ function render(countries) {
     container.appendChild(grid);
 }
 
-// Create a single country card
+// create single country card
 function createCountryCard(country) {
     const name = country.name.common;
     const flag = country.flags.png;
@@ -47,7 +46,7 @@ function createCountryCard(country) {
         </div>
     `;
     
-    // Click card to go to detail page
+    // click card to go to detail page
     card.addEventListener('click', () => {
     const basePath = getBasePath();
     window.location.href = `${basePath}country/${name.toLowerCase()}`;

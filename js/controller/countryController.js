@@ -1,4 +1,3 @@
-// countryController.js
 import countryService from '../service/countryService.js';
 import countryView from '../view/countryView.js';
 

@@ -37,7 +37,7 @@ function render(countries) {
     const randomIndex = Math.floor(Math.random() * countries.length);
     const randomCountry = countries[randomIndex];
 
-    // Show world map and button at first (no country yet!)
+    // show world map and button at first
     randomSection.innerHTML = `
     <div class="random-country-card">
         <img src="img/worldmap-green.png" 
@@ -112,9 +112,9 @@ function render(countries) {
                 </div>
             `;
 
-            // Make the flag clickable!
+            // make the flag clickable!
             const flag = document.querySelector('.random-country-flag');
-            flag.style.cursor = 'pointer'; // Show it's clickable
+            flag.style.cursor = 'pointer'; // show it's clickable
             flag.addEventListener('click', () => {
                 const basePath = document.querySelector('base')?.getAttribute('href') || '/';
                 window.location.href = `${basePath}country/${newCountry.name.common.toLowerCase()}`;

@@ -1,4 +1,3 @@
-// router.js
 import routes from "./routes.js";
 
 function setCurrentRoute({ path, controller }) {
@@ -19,7 +18,7 @@ function extractParams(url, pattern) {
         if (patternParts[i].startsWith(':')) {
             // remove the ':' and use as key, get value from URL
             const paramName = patternParts[i].substring(1); // 'name'
-            params[paramName] = urlParts[i]; // portugal
+            params[paramName] = urlParts[i]; 
         }
     }
     
@@ -44,10 +43,10 @@ function matchRoute(url, pattern) {
 
 // updated... now finds routes with dynamic parameters
 function navigate(path, firstload = false) {
-    // On first load, check if we're redirected from 404
+    // on first load, check if we're redirected from 404
     if (firstload && window.__spa_redirect__) {
         const redirectUrl = new URL(window.__spa_redirect__);
-        path = redirectUrl.pathname.replace('/spa-country-info', ''); // Remove base path
+        path = redirectUrl.pathname.replace('/spa-country-info', ''); // remove base path
         delete window.__spa_redirect__;
     }
     

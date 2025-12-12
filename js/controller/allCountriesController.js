@@ -1,10 +1,9 @@
-// allCountriesController.js
 import countryService from '../service/countryService.js';
 import allCountriesView from '../view/allCountriesView.js';
 
-// Initialize all countries grid page
+// init all countries grid page
 export async function init(params) {
-    // Show loading state
+    // show loading state
     const container = document.querySelector('#container');
     container.innerHTML = `
         <div class="text-center mt-5">
@@ -15,12 +14,12 @@ export async function init(params) {
         </div>
     `;
     
-    // Fetch all countries from API
+    // fetch all countries from API
     const countries = await countryService.getAllCountries();
     
-    // Check if we got data
+    // check for incoming data
     if (countries && countries.length > 0) {
-        // Sort countries alphabetically
+        // sort countries alphabetically
         countries.sort((a, b) => {
             const nameA = a.name.common.toUpperCase();
             const nameB = b.name.common.toUpperCase();
@@ -29,10 +28,10 @@ export async function init(params) {
             return 0;
         });
         
-        // Render the view with sorted countries
+        // render view with sorted countries
         allCountriesView.render(countries);
     } else {
-        // Show error if no data
+        // show error if no data
         container.innerHTML = `
             <div class="error-message text-center">
                 <h3>Oops! Could not load countries</h3>

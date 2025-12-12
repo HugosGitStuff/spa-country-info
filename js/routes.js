@@ -1,4 +1,3 @@
-
 // routes.js defines all the "pages" in our SPA
 // it's a map: each route = one "page" the user can visit
 export default {
