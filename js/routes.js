@@ -10,19 +10,19 @@ export default {
     
     // all countries detail page
     countries: {
-        path: '/countries',
+        path: 'countries',
         controller: 'allCountriesController'
     },
 
     // single country detail page
     country: {
-        path: '/country/:name',  // :name is a placeholder (like a variable in URL)
+        path: 'country/:name',  // :name is a placeholder (like a variable in URL)
         controller: 'countryController'
     },
     
     // region view: all countries in a region
     region: {
-        path: '/region/:region',  // :region is the placeholder
+        path: 'region/:region',  // :region is the placeholder
         controller: 'regionController'
     },
     

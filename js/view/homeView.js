@@ -34,7 +34,7 @@ function render(countries) {
     // Show world map and button at first (no country yet!)
     randomSection.innerHTML = `
     <div class="random-country-card">
-        <img src="/img/worldmap-green.png" 
+        <img src="img/worldmap-green.png" 
              alt="World Map" 
              class="random-country-flag"
              style="opacity: 0.7;">
