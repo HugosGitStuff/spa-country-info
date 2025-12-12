@@ -44,7 +44,7 @@ function matchRoute(url, pattern) {
 
 // updated... now finds routes with dynamic parameters
 function navigate(path, firstload = false) {
-    if (path === routes.currentPath.path) {
+    if (path === routes.currentPath.path && path !== '/') {
         return;
     }
 

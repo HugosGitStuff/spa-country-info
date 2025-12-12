@@ -8,6 +8,12 @@ export default {
         controller: 'homeController'
     },
     
+    // all countries detail page
+    countries: {
+        path: '/countries',
+        controller: 'allCountriesController'
+    },
+
     // single country detail page
     country: {
         path: '/country/:name',  // :name is a placeholder (like a variable in URL)
