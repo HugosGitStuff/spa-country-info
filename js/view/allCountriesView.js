@@ -1,6 +1,12 @@
 // allCountriesView.js
 // This view renders all countries in a grid
 
+// Helper to get correct base path for navigation
+function getBasePath() {
+    const base = document.querySelector('base');
+    return base ? base.getAttribute('href') : '/';
+}
+
 function render(countries) {
     const container = document.querySelector('#container');
     container.innerHTML = ''; // Clear previous content
@@ -43,8 +49,9 @@ function createCountryCard(country) {
     
     // Click card to go to detail page
     card.addEventListener('click', () => {
-        window.location.href = `/country/${name.toLowerCase()}`;
-    });
+    const basePath = getBasePath();
+    window.location.href = `${basePath}country/${name.toLowerCase()}`;
+});
     
     return card;
 }

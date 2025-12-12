@@ -44,6 +44,13 @@ function matchRoute(url, pattern) {
 
 // updated... now finds routes with dynamic parameters
 function navigate(path, firstload = false) {
+    // On first load, check if we're redirected from 404
+    if (firstload && window.__spa_redirect__) {
+        const redirectUrl = new URL(window.__spa_redirect__);
+        path = redirectUrl.pathname.replace('/spa-country-info', ''); // Remove base path
+        delete window.__spa_redirect__;
+    }
+    
     if (path === routes.currentPath.path && path !== '/') {
         return;
     }

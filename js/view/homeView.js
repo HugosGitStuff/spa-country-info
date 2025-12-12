@@ -1,5 +1,11 @@
 // this view renders home page
 
+// Helper to get correct base path for navigation
+function getBasePath() {
+    const base = document.querySelector('base');
+    return base ? base.getAttribute('href') : '/';
+}
+
 function render(countries) {
     const container = document.querySelector('#container');
     container.innerHTML = ''; // clear previous content
