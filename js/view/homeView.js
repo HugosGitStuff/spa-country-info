@@ -63,7 +63,7 @@ function render(countries) {
 
         // navigate if found
         if (matchingCountry) {
-            window.location.href = `/country/${matchingCountry.name.common.toLowerCase()}`;
+            window.location.href = `country/${matchingCountry.name.common.toLowerCase()}`;
         } else {
             alert('Country not found!');
         }
@@ -109,7 +109,7 @@ function render(countries) {
             const flag = document.querySelector('.random-country-flag');
             flag.style.cursor = 'pointer'; // Show it's clickable
             flag.addEventListener('click', () => {
-                window.location.href = `/country/${newCountry.name.common.toLowerCase()}`;
+                window.location.href = `country/${newCountry.name.common.toLowerCase()}`;
             });
 
             // setup the new button again
