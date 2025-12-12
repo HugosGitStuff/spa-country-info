@@ -20,15 +20,6 @@ export async function init(params) {
     
     // check for data
     if (countries && countries.length > 0) {
-        // sort countries alphabetically
-        countries.sort((a, b) => {
-            const nameA = a.name.common.toUpperCase();
-            const nameB = b.name.common.toUpperCase();
-            
-            if (nameA < nameB) return -1; // a comes before b
-            if (nameA > nameB) return 1;  // a comes after b
-            return 0; // they're equal
-        });
         
         homeView.render(countries); // render the view with sorted country data
     } else {

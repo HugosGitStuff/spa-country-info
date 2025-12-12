@@ -1,114 +1,86 @@
-// this view renders the home page with country cards
+// homeView.js
+// This view renders the home page
 
-// render the home page with search bar and country grid
 function render(countries) {
     const container = document.querySelector('#container');
-    container.innerHTML = ''; // clear previous content
+    container.innerHTML = ''; // Clear previous content
     
-    // create search section... static part at top
+    // Create search section
     const searchSection = document.createElement('div');
     searchSection.className = 'search-section';
     searchSection.innerHTML = `
-        <h2>Explore Countries Around the World</h2>
-        <input 
-            type="text" 
-            id="searchInput" 
-            class="form-control search-input" 
-            placeholder="Search for a country..."
-        >
-    `;
-    
-    // Create grid container for country cards
-    const grid = document.createElement('div');
-    grid.className = 'country-grid';
-    grid.id = 'countryGrid';
-    
-    // Create a card for each country
-    countries.forEach(country => {
-        const card = createCountryCard(country);
-        grid.appendChild(card);
-    });
-    
-    // Add everything to the main container
-    container.appendChild(searchSection);
-    container.appendChild(grid);
-    
-    // Add search functionality
-    setupSearch(countries);
-}
-
-/**
- * Create a single country card element
- * @param {Object} country - Country object from API
- * @returns {HTMLElement} - The country card element
- */
-function createCountryCard(country) {
-    // Extract country data (API structure)
-    const name = country.name.common; // e.g., "Portugal"
-    const flag = country.flags.png; // Flag image URL
-    const population = country.population.toLocaleString(); // Format with commas
-    const region = country.region; // e.g., "Europe"
-    const capital = country.capital ? country.capital[0] : 'N/A'; // Some countries have no capital
-    
-    // Create card element
-    const card = document.createElement('div');
-    card.className = 'country-card';
-    
-    // Fill card with HTML
-    card.innerHTML = `
-        <img src="${flag}" alt="${name} flag" class="country-flag">
-        <div class="country-info">
-            <div class="country-name">${name}</div>
-            <div class="country-details">
-                <strong>Population:</strong> ${population}<br>
-                <strong>Region:</strong> ${region}<br>
-                <strong>Capital:</strong> ${capital}
-            </div>
+        <h3>Explore Countries Around the World</h3>
+        <div class="input-group">
+            <input 
+                type="text" 
+                id="searchInput" 
+                class="form-control search-input" 
+                placeholder="Search for a country..."
+            >
+            <button class="btn btn-outline-primary" type="button" id="searchButton">
+                🔍
+            </button>
         </div>
     `;
     
-    // NEW CODE (FIXED):
-    card.addEventListener('click', () => {
-        const countryName = name.toLowerCase();
-        // Use the browser's native navigation - let the router handle it!
-        window.location.href = `/country/${countryName}`;
-        });
-    
-    return card;
-}
+    container.appendChild(searchSection);
 
-// setup search functionality
-function setupSearch(allCountries) {
-    const searchInput = document.querySelector('#searchInput');
-    const grid = document.querySelector('#countryGrid');
+    // Create random country section
+const randomSection = document.createElement('div');
+randomSection.className = 'random-country-section';
+randomSection.id = 'randomSection';
+
+// Get a random country to start with
+const randomIndex = Math.floor(Math.random() * countries.length);
+const randomCountry = countries[randomIndex];
+
+// Add the random country display
+randomSection.innerHTML = `
+    <div class="random-country-card">
+        <img src="${randomCountry.flags.svg || randomCountry.flags.png}" 
+             alt="${randomCountry.name.common} flag" 
+             class="random-country-flag">
+        <h2 class="random-country-name">${randomCountry.name.common}</h2>
+        <div class="random-country-info">
+            <p><strong>Population:</strong> ${randomCountry.population.toLocaleString()}</p>
+            <p><strong>Region:</strong> ${randomCountry.region}</p>
+            <p><strong>Capital:</strong> ${randomCountry.capital ? randomCountry.capital[0] : 'N/A'}</p>
+        </div>
+        <button class="btn btn-primary btn-lg" id="randomButton">
+            🎲 Get Random Country
+        </button>
+    </div>
+`;
+
+container.appendChild(randomSection);
     
-    // listen for typing in search box
-    searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
+    // Get the search elements
+    const searchInput = document.querySelector('#searchInput');
+    const searchButton = document.querySelector('#searchButton');
+    
+    // When button is clicked
+    searchButton.addEventListener('click', () => {
+        const searchTerm = searchInput.value.trim().toLowerCase();
         
-        // filter countries based on search term
-        const filtered = allCountries.filter(country => {
+        // Find matching country
+        const matchingCountry = countries.find(country => {
             const name = country.name.common.toLowerCase();
             return name.includes(searchTerm);
         });
         
-        // clear grid
-        grid.innerHTML = '';
-        
-        // show filtered results
-        if (filtered.length > 0) {
-            filtered.forEach(country => {
-                const card = createCountryCard(country);
-                grid.appendChild(card);
-            });
+        // Navigate if found
+        if (matchingCountry) {
+            window.location.href = `/country/${matchingCountry.name.common.toLowerCase()}`;
         } else {
-            // no results found
-            grid.innerHTML = '<p class="text-center">No countries found</p>';
+            alert('Country not found!');
         }
-        
-        // update count
-        const countText = document.querySelector('.search-section p');
-        countText.textContent = `Found ${filtered.length} countries`;
+    });
+    
+    // When Enter key is pressed
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            searchButton.click(); // Simulate button click
+        }
     });
 }
 
