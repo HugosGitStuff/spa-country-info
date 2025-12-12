@@ -1,11 +1,10 @@
-// homeView.js
-// This view renders the home page
+// this view renders home page
 
 function render(countries) {
     const container = document.querySelector('#container');
-    container.innerHTML = ''; // Clear previous content
+    container.innerHTML = ''; // clear previous content
     
-    // Create search section
+    // create search section
     const searchSection = document.createElement('div');
     searchSection.className = 'search-section';
     searchSection.innerHTML = `
@@ -15,26 +14,24 @@ function render(countries) {
                 type="text" 
                 id="searchInput" 
                 class="form-control search-input" 
-                placeholder="Search for a country..."
+                placeholder="Find country..."
             >
-            <button class="btn btn-outline-primary" type="button" id="searchButton">
-                🔍
-            </button>
+            <button class="btn btn-outline-dark" type="button" id="searchButton">🔍</button>
         </div>
     `;
     
     container.appendChild(searchSection);
 
-    // Create random country section
+// create random country section
 const randomSection = document.createElement('div');
 randomSection.className = 'random-country-section';
 randomSection.id = 'randomSection';
 
-// Get a random country to start with
+// get random country to start with
 const randomIndex = Math.floor(Math.random() * countries.length);
 const randomCountry = countries[randomIndex];
 
-// Add the random country display
+// add random country display
 randomSection.innerHTML = `
     <div class="random-country-card">
         <img src="${randomCountry.flags.svg || randomCountry.flags.png}" 
@@ -43,32 +40,32 @@ randomSection.innerHTML = `
         <h2 class="random-country-name">${randomCountry.name.common}</h2>
         <div class="random-country-info">
             <p><strong>Population:</strong> ${randomCountry.population.toLocaleString()}</p>
-            <p><strong>Region:</strong> ${randomCountry.region}</p>
+            <p><strong>Continent:</strong> ${randomCountry.region}</p>
             <p><strong>Capital:</strong> ${randomCountry.capital ? randomCountry.capital[0] : 'N/A'}</p>
         </div>
-        <button class="btn btn-primary btn-lg" id="randomButton">
-            🎲 Get Random Country
+        <button class="btn btn-secondary btn-lg" id="randomButton">
+            🔀 Get Random Country
         </button>
     </div>
 `;
 
 container.appendChild(randomSection);
     
-    // Get the search elements
+    // get search elements
     const searchInput = document.querySelector('#searchInput');
     const searchButton = document.querySelector('#searchButton');
     
-    // When button is clicked
+    // when button clicked
     searchButton.addEventListener('click', () => {
         const searchTerm = searchInput.value.trim().toLowerCase();
         
-        // Find matching country
+        // find matching country
         const matchingCountry = countries.find(country => {
             const name = country.name.common.toLowerCase();
             return name.includes(searchTerm);
         });
         
-        // Navigate if found
+        // navigate if found
         if (matchingCountry) {
             window.location.href = `/country/${matchingCountry.name.common.toLowerCase()}`;
         } else {
@@ -76,12 +73,25 @@ container.appendChild(randomSection);
         }
     });
     
-    // When Enter key is pressed
+    // when enter key is pressed
     searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-            searchButton.click(); // Simulate button click
+            searchButton.click(); // simulate button click
         }
     });
+
+    // get the random button
+    const randomButton = document.querySelector('#randomButton');
+    
+    // when random button is clicked
+randomButton.addEventListener('click', () => {
+    // get new random country
+    const randomIndex = Math.floor(Math.random() * countries.length);
+    const newCountry = countries[randomIndex];
+    
+    console.log('New country:', newCountry.name.common); // Test in console
+});
+
 }
 
 export default { render };

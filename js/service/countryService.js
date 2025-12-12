@@ -9,6 +9,7 @@ const FIELDS = 'name,flags,population,region,capital,currencies,languages,border
 
 // fetch all countries from api... returns array of country objects.
 async function getAllCountries() {
+    
     try {
         // make http get request to api
         // add ?fields= parameter to specify what data we want

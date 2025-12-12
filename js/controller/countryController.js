@@ -2,9 +2,9 @@
 import countryService from '../service/countryService.js';
 import countryView from '../view/countryView.js';
 
-// Initialize country detail page
+// init country detail page
 export async function init(params) {
-    // oading state
+    // loading state
     const container = document.querySelector('#container');
     container.innerHTML = `
         <div class="text-center mt-5">
@@ -15,24 +15,24 @@ export async function init(params) {
         </div>
     `;
     
-    // Get country name from URL parameters
+    // get country name from url parameters
     const countryName = params.name;
     
     if (!countryName) {
-        // No country name provided, redirect to home
+        // no country name, redirect to home
         window.location.href = '/';
         return;
     }
     
-    // Fetch country data from API
+    // get country data from api
     const country = await countryService.getCountryByName(countryName);
     
-    // Check if we got data
+    // check for data incoming
     if (country) {
-        // Render the country detail view
+        // render the country detail view
         countryView.render(country);
     } else {
-        // Show error if country not found
+        // error if country not found
         container.innerHTML = `
             <div class="error-message text-center">
                 <h3>Country Not Found</h3>

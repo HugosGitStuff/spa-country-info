@@ -21,7 +21,7 @@ export async function init(params) {
     // check for data
     if (countries && countries.length > 0) {
         
-        homeView.render(countries); // render the view with sorted country data
+        homeView.render(countries); // render view with sorted country data
     } else {
         // show error if no data
         container.innerHTML = `

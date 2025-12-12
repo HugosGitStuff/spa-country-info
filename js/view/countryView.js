@@ -1,15 +1,11 @@
-// countryView.js
-// This view renders the detailed page for a single country
+// this view renders the detailed page for a single country
 
-/**
- * Render country detail page
- * @param {Object} country - Single country object from API
- */
+// render country detail page... single country object from api
 function render(country) {
     const container = document.querySelector('#container');
-    container.innerHTML = ''; // Clear previous content
+    container.innerHTML = ''; // clear previous content
     
-    // Extract country data
+    // extract country data
     const name = country.name.common;
     const nativeName = getNativeName(country.name.nativeName);
     const flag = country.flags.svg || country.flags.png;
@@ -18,13 +14,13 @@ function render(country) {
     const capital = country.capital ? country.capital[0] : 'N/A';
     const currencies = getCurrencies(country.currencies);
     const languages = getLanguages(country.languages);
-    const borders = country.borders || []; // Array of country codes
+    const borders = country.borders || []; // array of country codes
     
-    // Create detail container
+    // create detail container
     const detailDiv = document.createElement('div');
     detailDiv.className = 'detail-container';
     
-    // Build the HTML structure
+    // html structure
     detailDiv.innerHTML = `
         <div class="row">
             <!-- Left side: Flag -->
@@ -59,7 +55,7 @@ function render(country) {
                 ` : ''}
                 
                 <div class="mt-4">
-                    <a href="/" class="btn btn-primary">← Back to Home</a>
+                    <a href="/" class="btn btn-secondary">← Back to Home</a>
                 </div>
             </div>
         </div>
@@ -67,28 +63,24 @@ function render(country) {
     
     container.appendChild(detailDiv);
     
-    // Add click handlers to border buttons
+    // add click handlers to border buttons
     setupBorderButtons();
 }
 
-/**
- * Get native name from nativeName object
- */
+// get native name from nativeName object
 function getNativeName(nativeNameObj) {
     if (!nativeNameObj) return 'N/A';
     
-    // Get first native name available
+    // get first native name available
     const firstKey = Object.keys(nativeNameObj)[0];
     return nativeNameObj[firstKey]?.common || 'N/A';
 }
 
-/**
- * Format currencies into readable string
- */
+// format currencies into readable string
 function getCurrencies(currenciesObj) {
     if (!currenciesObj) return 'N/A';
     
-    // Extract currency names and join them
+    // extract currency names and join them
     const currencyNames = Object.values(currenciesObj)
         .map(currency => currency.name)
         .join(', ');
@@ -96,22 +88,17 @@ function getCurrencies(currenciesObj) {
     return currencyNames || 'N/A';
 }
 
-/**
- * Format languages into readable string
- */
+// format languages into readable string
 function getLanguages(languagesObj) {
     if (!languagesObj) return 'N/A';
     
-    // Extract language names and join them
+    // extract language names and join them
     const languageNames = Object.values(languagesObj).join(', ');
     
     return languageNames || 'N/A';
 }
 
-/**
- * Create buttons for border countries
- * @param {Array} borders - Array of country codes (e.g., ['IND', 'CHN'])
- */
+// create buttons for border countries
 function createBorderButtons(borders) {
     return borders
         .map(code => `
@@ -122,9 +109,7 @@ function createBorderButtons(borders) {
         .join('');
 }
 
-/**
- * Setup click handlers for border country buttons
- */
+// setup click handlers for border country buttons
 function setupBorderButtons() {
     const buttons = document.querySelectorAll('.border-btn');
     
@@ -132,10 +117,9 @@ function setupBorderButtons() {
         button.addEventListener('click', () => {
             const code = button.dataset.code;
             
-            // Navigate to country by code
-            // We'll need to convert code to country name
-            // For now, just reload the page with the code
-            // (We can improve this later if needed)
+            // navigate to country by code
+            // need to convert code to country name
+            // for now, just reload the page with the code
             window.location.href = `/country/${code.toLowerCase()}`;
         });
     });

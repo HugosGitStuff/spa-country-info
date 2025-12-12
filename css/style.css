@@ -1,26 +1,26 @@
-/* General styles */
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #273340;
     min-height: 100vh;
 }
 
-/* Navbar customization */
+/* navbar customization */
 .navbar-brand {
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-/* Container spacing */
+/* container spacing */
 #container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 10px 20px; /* Less top/bottom padding */
 }
 
-/* Search bar styles for home page */
+/* search bar styles for home page */
 .search-section {
-    background: white;
+    background: #869aae;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -31,7 +31,7 @@ body {
     padding: 12px;
 }
 
-/* Country detail page */
+/* country detail page */
 .detail-container {
     background: white;
     padding: 30px;
@@ -47,13 +47,13 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-/* Loading spinner styles */
+/* loading spinner styles */
 .spinner-border {
     width: 3rem;
     height: 3rem;
 }
 
-/* Error message */
+/* error message */
 .error-message {
     background-color: #f8d7da;
     color: #721c24;
@@ -62,14 +62,14 @@ body {
     border: 1px solid #f5c6cb;
 }
 
-/* Responsive design */
+/* responsive design */
 @media (max-width: 768px) {
     .search-section {
         padding: 20px;
     }
 }
 
-/* Random country section - centered */
+/* random country section - centered */
 .random-country-section {
     display: flex;
     justify-content: center;
@@ -78,7 +78,7 @@ body {
 }
 
 .random-country-card {
-    background: white;
+    background: #869aae;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -99,12 +99,12 @@ body {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 20px;
-    color: #333;
+    color: #2c323f;
 }
 
 .random-country-info {
     font-size: 1.1rem;
-    color: #666;
+    color: #2c323f;
     margin-bottom: 10px;
 }
 
@@ -114,19 +114,16 @@ body {
 
 /* Responsive design for BIGGER screens ONLY (iMac, large external monitors) */
 @media (min-width: 1600px) {
-    /* Bigger flag on large screens */
     .random-country-flag {
         height: 350px;
         max-width: 500px;
     }
     
-    /* More padding in the card */
     .random-country-card {
         padding: 50px;
         max-width: 700px;
     }
     
-    /* Larger text */
     .random-country-name {
         font-size: 2.5rem;
     }
@@ -134,8 +131,7 @@ body {
     .random-country-info {
         font-size: 1.3rem;
     }
-    
-    /* More spacing in search section */
+
     .search-section {
         padding: 40px;
     }
