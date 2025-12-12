@@ -238,7 +238,7 @@ This project was completed during **Week 9** of a **14-week Java Full-Stack Boot
 
 ## 👨‍💻 Author
 
-**Hugo** - Java Full-Stack Development Bootcamp Student  
+**Hugo** - Softaware Engineering and AI Full-Stack Development Bootcamp Student  
 - GitHub: [@hugosgitstuff](https://github.com/hugosgitstuff)
 
 ---
@@ -248,7 +248,6 @@ This project was completed during **Week 9** of a **14-week Java Full-Stack Boot
 - **REST Countries API** for providing free country data
 - **Bootstrap** team for the CSS framework
 - **Bootcamp Instructors** for guidance and support
-- **Claude AI** for pair programming assistance
 
 ---
 
