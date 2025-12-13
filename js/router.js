@@ -10,18 +10,18 @@ function extractParams(url, pattern) {
     // split URL and pattern into parts
     const urlParts = url.split('/').filter(part => part); // ['country', 'portugal']
     const patternParts = pattern.split('/').filter(part => part); // ['country', ':name']
-    
+
     const params = {};
-    
+
     // loop through each part and find parameters parts starting with :
     for (let i = 0; i < patternParts.length; i++) {
         if (patternParts[i].startsWith(':')) {
             // remove the ':' and use as key, get value from URL
             const paramName = patternParts[i].substring(1); // 'name'
-            params[paramName] = urlParts[i]; 
+            params[paramName] = decodeURIComponent(urlParts[i]); // Decode URL encoding!
         }
     }
-    
+
     return params;
 }
 
@@ -29,12 +29,12 @@ function extractParams(url, pattern) {
 function matchRoute(url, pattern) {
     const urlParts = url.split('/').filter(part => part);
     const patternParts = pattern.split('/').filter(part => part);
-    
+
     // must have same number of parts
     if (urlParts.length !== patternParts.length) {
         return false;
     }
-    
+
     // check each part... either exact match or parameter that starts with :
     return patternParts.every((part, i) => {
         return part.startsWith(':') || part === urlParts[i];
@@ -49,7 +49,7 @@ function navigate(path, firstload = false) {
         path = redirectUrl.pathname.replace('/spa-country-info', ''); // remove base path
         delete window.__spa_redirect__;
     }
-    
+
     if (path === routes.currentPath.path && path !== '/') {
         return;
     }
@@ -57,10 +57,10 @@ function navigate(path, firstload = false) {
     // find matching route... now handles dynamic routes
     let matchedRoute = null;
     let params = {};
-    
+
     for (const key in routes) {
         if (key === 'currentPath') continue; // skip currentPath
-        
+
         const route = routes[key];
         if (matchRoute(path, route.path)) {
             matchedRoute = route;
@@ -68,7 +68,7 @@ function navigate(path, firstload = false) {
             break;
         }
     }
-    
+
     // no match found, use home route
     const route = matchedRoute || routes.home;
 
