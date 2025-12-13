@@ -44,7 +44,7 @@ function render(countries) {
              alt="World Map" 
              class="random-country-flag"
              style="opacity: 0.7;">
-        <h3 style="color: #2c323f; margin: 20px 0;"> Click and Discover a Random Country</h3>
+        <h3 style="color: #2c323f; margin-bottom: 20px;"> Click and Discover a Random Country</h3>
         <button class="btn btn-secondary btn-lg" id="randomButton">
             🌍 Let's explore!
         </button>
@@ -52,6 +52,18 @@ function render(countries) {
 `;
 
     container.appendChild(randomSection);
+
+    container.appendChild(randomSection);
+
+    // make world map clickable
+    const worldMap = document.querySelector('.random-country-flag');
+    if (worldMap) {
+        worldMap.style.cursor = 'pointer'; // show it's clickable
+        worldMap.addEventListener('click', () => {
+            const button = document.querySelector('#randomButton');
+            button.click(); // trigger button click
+        });
+    }
 
     // get search elements
     const searchInput = document.querySelector('#searchInput');
