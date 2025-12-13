@@ -53,8 +53,6 @@ function render(countries) {
 
     container.appendChild(randomSection);
 
-    container.appendChild(randomSection);
-
     // make world map clickable
     const worldMap = document.querySelector('.random-country-flag');
     if (worldMap) {
@@ -73,11 +71,27 @@ function render(countries) {
     searchButton.addEventListener('click', () => {
         const searchTerm = searchInput.value.trim().toLowerCase();
 
-        // find matching country
-        const matchingCountry = countries.find(country => {
+        // First try exact match
+        let matchingCountry = countries.find(country => {
             const name = country.name.common.toLowerCase();
-            return name.includes(searchTerm);
+            return name === searchTerm;
         });
+
+        // If no exact match, try partial match (shortest name first)
+        if (!matchingCountry) {
+            const partialMatches = countries.filter(country => {
+                const name = country.name.common.toLowerCase();
+                return name.includes(searchTerm);
+            });
+
+            if (partialMatches.length > 0) {
+                // Sort by length - shortest first (main countries before territories)
+                partialMatches.sort((a, b) =>
+                    a.name.common.length - b.name.common.length
+                );
+                matchingCountry = partialMatches[0];
+            }
+        }
 
         // navigate if found
         if (matchingCountry) {

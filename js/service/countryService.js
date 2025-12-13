@@ -9,21 +9,21 @@ const FIELDS = 'name,flags,population,region,capital,currencies,languages,border
 
 // fetch all countries from api... returns array of country objects.
 async function getAllCountries() {
-    
+
     try {
         // make http get request to api
         // add ?fields= parameter to specify what data we want
         const response = await fetch(`${BASE_URL}/all?fields=${FIELDS}`);
-        
+
         // check if request was successful... status code 200-299
         if (!response.ok) {
             throw new Error('Poopoo =( ... Failed to fetch countries');
         }
-        
+
         // convert response to json
         const countries = await response.json();
         return countries;
-        
+
     } catch (error) {
         // if something goes wrong, log it and return empty array
         console.error('Poopoo =( ... Error fetching countries:', error);
@@ -32,27 +32,36 @@ async function getAllCountries() {
 }
 
 // fetch countries by name... returns Country object.
-async function getCountryByName(name){
+async function getCountryByName(name) {
 
-  try {
-    const response = await fetch(`${BASE_URL}/name/${name}?fields=${FIELDS}`);
+    try {
+        const response = await fetch(`${BASE_URL}/name/${name}?fields=${FIELDS}`);
 
         if (!response.ok) {
             throw new Error('Poopoo =( ... Country not found.');
         }
-        
-        const countries = await response.json();
-        return countries[0];
 
-  } catch (error) {
-      
+        const countries = await response.json();
+
+        // Find exact match first (e.g., "United States" not "United States Virgin Islands")
+        const exactMatch = countries.find(c =>
+            c.name.common.toLowerCase() === name.toLowerCase()
+        );
+
+        // Return exact match, or shortest name (main country, not territories)
+        return exactMatch || countries.sort((a, b) =>
+            a.name.common.length - b.name.common.length
+        )[0];
+
+    } catch (error) {
+
         console.error('Poopoo =( ... Error fetching country:', error);
         return null;
     }
 
 }
 
-// fetch all countries in a specific region... returns array of country objects in that region
+/* fetch all countries in a specific region... returns array of country objects in that region
 async function getCountriesByRegion(region) {
     try {
         const response = await fetch(`${BASE_URL}/region/${region}?fields=${FIELDS}`);
@@ -68,13 +77,13 @@ async function getCountriesByRegion(region) {
         console.error('Error fetching region:', error);
         return [];
     }
-}
+}*/
 
 // export all functions so other modules can use them
-export default { 
-    getAllCountries, 
-    getCountryByName, 
-    getCountriesByRegion 
+export default {
+    getAllCountries,
+    getCountryByName,
+    // getCountriesByRegion 
 };
 
 
