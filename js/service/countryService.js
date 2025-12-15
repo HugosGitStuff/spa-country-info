@@ -43,12 +43,12 @@ async function getCountryByName(name) {
 
         const countries = await response.json();
 
-        // Find exact match first (e.g., "United States" not "United States Virgin Islands")
+        // find exact match first
         const exactMatch = countries.find(c =>
             c.name.common.toLowerCase() === name.toLowerCase()
         );
 
-        // Return exact match, or shortest name (main country, not territories)
+        // return exact match, or shortest name
         return exactMatch || countries.sort((a, b) =>
             a.name.common.length - b.name.common.length
         )[0];

@@ -26,7 +26,7 @@ export async function init(params) {
         // show error if no data
         container.innerHTML = `
             <div class="error-message text-center">
-                <h3>Oops! Could not load countries</h3>
+                <h3>Poopoo =( ... Could not load countries</h3>
                 <p>Please check your internet connection and try again.</p>
             </div>
         `;

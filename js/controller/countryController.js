@@ -35,7 +35,7 @@ export async function init(params) {
         container.innerHTML = `
             <div class="error-message text-center">
                 <h3>Country Not Found</h3>
-                <p>Sorry, we couldn't find information about "${countryName}"</p>
+                <p>Poopoo =( ... Couldn't find information about "${countryName}"</p>
                 <a href="/" class="btn btn-primary mt-3">← Back to Home</a>
             </div>
         `;
